@@ -23,14 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b9529bf-28d0-4cdf-add7-abd619934e6a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/banking/service/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/banking/service/ConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +163,7 @@
       <option name="presentableId" value="Default" />
       <updated>1684860532735</updated>
       <workItem from="1684860534431" duration="370000" />
-      <workItem from="1684923581646" duration="7516000" />
+      <workItem from="1684923581646" duration="8232000" />
     </task>
     <servers />
   </component>
@@ -189,21 +183,25 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1222" height="163" key="GridCell.Tab.0.bottom" timestamp="1684868000227">
+    <state width="1235" height="165" key="GridCell.Tab.0.bottom" timestamp="1684940665775">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1222" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1684868000227" />
-    <state width="1222" height="163" key="GridCell.Tab.0.center" timestamp="1684868000227">
+    <state width="1235" height="165" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1684940665775" />
+    <state width="1235" height="165" key="GridCell.Tab.0.center" timestamp="1684940665773">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1222" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1684868000227" />
-    <state width="1222" height="163" key="GridCell.Tab.0.left" timestamp="1684868000227">
+    <state width="1235" height="165" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1684940665773" />
+    <state width="1235" height="165" key="GridCell.Tab.0.left" timestamp="1684940665773">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1222" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1684868000227" />
-    <state width="1222" height="163" key="GridCell.Tab.0.right" timestamp="1684868000227">
+    <state width="1235" height="165" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1684940665773" />
+    <state width="1235" height="165" key="GridCell.Tab.0.right" timestamp="1684940665774">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1222" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1684868000227" />
+    <state width="1235" height="165" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1684940665774" />
+    <state x="242" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1684941316328">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="242" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.680@0.0.1280.680" timestamp="1684941316328" />
   </component>
 </project>
