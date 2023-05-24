@@ -1,52 +1,22 @@
 package com.banking;
 
-import com.banking.service.Validator;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.banking.service.Authenticator;
 
 public class Main {
     public static void main(String[] args) {
         //our entry point
-        printAuthenticationInterface();
+        Authenticator authenticator = new Authenticator();
+        authenticator.requestAuthentication();
+
     }
 
-    public static void printAuthenticationInterface() {
-
-        //try with resources
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            Validator validator = new Validator();
-            long parsedEnteredNumber;
-            String validatedEnteredPassword;
-
-            //validation loop
-            while (true) {
-                System.out.println("Please input the account number: ");
-                String enteredNumber = reader.readLine();
-                if (!validator.validateAccNumber(enteredNumber)) {
-                    System.out.println("Please input a valid account number.");
-                    continue;
-                }
-                parsedEnteredNumber = Long.parseLong(enteredNumber);
-                break;
-            }
-            while (true) {
-                System.out.println("Please input the password: ");
-                String enteredPassword = reader.readLine();
-                if (!validator.validatePassword(enteredPassword)) {
-                    System.out.println("Please input a valid password.");
-                    continue;
-                }
-                validatedEnteredPassword = enteredPassword;
-                break;
-            }
-            System.out.println(parsedEnteredNumber + " " + validatedEnteredPassword);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static void printMainUI() {
+        System.out.println("Input the number corresponding to action you want to perform:\n" +
+                "0: Exit\n" +
+                "1: Show Balance\n" +
+                "2: Transfer To Own account\n" +
+                "3: Cash Withdrawl\n" +
+                "4: Funds Transfer");
     }
-
-
 }
 
