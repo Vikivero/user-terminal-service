@@ -1,41 +1,48 @@
 package com.banking.service;
 
-import com.banking.entity.Account;
+import com.banking.service.connection.ConnectionHandler;
+import com.banking.service.connection.SocketResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Authenticator {
-    public void requestAuthentication() {
 
-        long parsedEnteredNumber;
-        String validatedEnteredPassword;
-        AccountService accountService = new AccountService();
+    private final ConnectionHandler handler;
+
+    public Authenticator() {
+        handler = ConnectionHandler.getInstance();
+    }
+
+    public long authenticate() {
+
+        long validAccountNumber;
+        String validPassword;
 
         //try with resources
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            while (true) {
-                Validator validator = new Validator();
+        while (true) {
+            Validator validator = new Validator();
 
-                //validation loops moved to separate methods
-                parsedEnteredNumber = getAndValidateAccountNumber(reader, validator);
-                validatedEnteredPassword = getAndValidatePassword(reader, validator);
-
-                System.out.println(parsedEnteredNumber + " " + validatedEnteredPassword);
-
-                Account account = accountService.getByAccountNumber(parsedEnteredNumber);
-
-                if (account != null && account.getPassword().equals(validatedEnteredPassword)) {
-                    System.out.println("Correct credentials.");
-                    //return bez niczego jesli funkcja jest void zwroci po prostu ta funkcje
-                    return;
-                }
-                System.out.println("Incorrect account number or password.");
+            //validation loops moved to separate methods
+            try {
+                validAccountNumber = getAndValidateAccountNumber(reader, validator);
+                validPassword = getAndValidatePassword(reader, validator);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            SocketResponse authResponse = handler.sendAuthenticationRequest(validAccountNumber, validPassword);
+
+            if (authResponse.isSuccessful()) {
+                System.out.println("Correct credentials.");
+                //return bez niczego jesli funkcja jest void zwroci po prostu ta funkcje
+                return validAccountNumber;
+            }
+
+            System.out.println(authResponse.getErrorMessage());
         }
     }
 

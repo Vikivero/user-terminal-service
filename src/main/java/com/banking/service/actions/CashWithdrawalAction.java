@@ -10,14 +10,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class DepositAction implements Action {
-    private static final String ACTION_NAME = "Deposit money";
-    private final AccountService accountService;
-    private final Validator validator;
+public class CashWithdrawalAction implements Action {
+    private static final String ACTION_NAME = "Withdraw Cash";
+    private static final String ACTION_MESSAGE = "Your balance is %s credits.\n" +
+            "Enter the amount you want to withdraw and press Enter\n" +
+            "Please use decimal or floating point number (dot as delimiter):\n";
+    AccountService accountService;
+    Validator validator;
+    ConnectionHandler connectionHandler;
 
-    private final ConnectionHandler connectionHandler;
-
-    public DepositAction() {
+    public CashWithdrawalAction() {
         accountService = new AccountService();
         validator = new Validator();
         connectionHandler = ConnectionHandler.getInstance();
@@ -34,8 +36,8 @@ public class DepositAction implements Action {
         }
 
         while (true) {
-            double amount = getAmountFromUser();
-            SocketResponse response = connectionHandler.sendDepositRequest(bankAccount.getAccountNumber(), amount);
+            double amount = getAmountFromUser(bankAccount.getAccountBalance());
+            SocketResponse response = connectionHandler.sendWithdrawRequest(bankAccount.getAccountNumber(), amount);
 
             boolean finished = tryToCompleteAction(response);
 
@@ -44,28 +46,28 @@ public class DepositAction implements Action {
             }
         }
     }
-
     @Override
     public void printGreetings() {
         System.out.printf(GREETING_MSG, ACTION_NAME);
     }
 
-    private double getAmountFromUser() {
-        System.out.println("Enter the amount you want to deposit and insert money (by pressing Enter).\n" +
-                "Please use deciamal or floating point number (dot as delimiter):");
+    private double getAmountFromUser(double accountBalance) {
+        System.out.printf(ACTION_MESSAGE, String.format("%,.2f", accountBalance));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
             try {
                 String enteredAmount = br.readLine();
+
                 if (validator.validateMoneyAmount(enteredAmount)) {
                     double amount = Double.parseDouble(enteredAmount);
-                    System.out.printf("You are going to deposit %,.2f credits. Please wait...\n", amount);
+                    System.out.printf("Your are going to withdraw %,.2f credits. Please wait...\n", amount);
                     return amount;
                 } else {
                     System.out.println("Invalid amount. Please enter the correct amount using decimal or floating point number (dot as delimiter):");
                 }
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

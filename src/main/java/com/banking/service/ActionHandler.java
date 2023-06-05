@@ -8,30 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ActionHandler {
+    private final long accountNumber;
+
+    public ActionHandler(long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
     public void executeAction(int action) {
-        Action selectedAction = null;
-        switch(action) {
-            case 0:
-                selectedAction = new ExitAction();
-                break;
-            case 1:
-                selectedAction = new ShowBalanceAction();
-                break;
-            case 2:
-                selectedAction = new DepositAction();
-                break;
-            case 3:
-                selectedAction = new CashWithdrawal();
-                break;
-            case 4:
-                selectedAction = new FundsTransfer();
-                break;
-            default:
-                selectedAction = new UndefinedAction();
-        }
+        Action selectedAction = switch (action) {
+            case 1 -> new ShowBalanceAction();
+            case 2 -> new DepositAction();
+            case 3 -> new CashWithdrawalAction();
+            case 4 -> new FundsTransferAction();
+            case 0 -> new ExitAction();
+            default -> new UndefinedAction();
+        };
 
         try {
-            selectedAction.executeAction();
+            selectedAction.printGreetings();
+            selectedAction.executeAction(accountNumber);
         } catch (OperationNotSupportedException e) {
             e.printStackTrace();
         }
@@ -39,31 +34,39 @@ public class ActionHandler {
 
     public int getActionFromUser() {
         String errorMsg = "Please input a number from 0 to 4: ";
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            while (true) {
-                System.out.println("Input the number corresponding to action you want to perform: \n" +
-                        "0: Exit\n" +
-                        "1: Show Balance\n" +
-                        "2: Transfer To Own account\n" +
-                        "3: Cash Withdrawal\n" +
-                        "4: Funds Transfer");
-                int userInputTemp;
-                try {
-                    userInputTemp = Integer.parseInt(reader.readLine());
-                } catch (NumberFormatException nfe) {
-                    System.out.println(errorMsg);
-                    continue;
-                }
-                if (userInputTemp < 0 || userInputTemp > 4) {
-                    System.out.println(errorMsg);
-                    continue;
-                }
+        String delimiter = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+        String header = "User Terminal v0.1\n";
 
-                System.out.println("You have selected the action number: " + userInputTemp);
-                return userInputTemp;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            System.out.println(delimiter +
+                    header +
+                    delimiter +
+                    "Hi! Your account number is " + accountNumber + "\n" +
+                    "Input the number corresponding to action you want to perform: \n" +
+                    "1: Show Balance\n" +
+                    "2: Deposit money\n" +
+                    "3: Cash Withdrawal\n" +
+                    "4: Funds Transfer:\n" +
+                    "0: Exit\n" +
+                    "------------------");
+            int userInputAction = -1;
+            try {
+                userInputAction = Integer.parseInt(br.readLine());
+            } catch (NumberFormatException nfe) {
+                System.out.println(errorMsg);
+                continue;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            if (userInputAction < 0 || userInputAction > 4) {
+                System.out.println(errorMsg);
+                continue;
+            }
+
+            return userInputAction;
         }
+
     }
 }
